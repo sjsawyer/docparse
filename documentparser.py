@@ -4,33 +4,43 @@ import re
 
 class DocumentParser():
     ''' Parse class '''
-    def __init__(self, search_regex, search_functions, delimiter, header,
-                 discard=0):
-        self.search_functions = search_functions
+    def __init__(self, query, delimiter, discard=0):
+        self._query_functions = self._set_query_functions(query)
+        self._compiled_query_regex = self._compile_regex(query)
+        self._header = query.keys()
         self.delimiter = delimiter
-        self.search_regex = search_regex
-        self.header = header
         self.discard = discard
-        # compile the user specified regex
-        self._compiled_search_regex = self._create_regex(search_regex)
 
-    def _create_regex(self, search_regex):
+    def _compile_regex(self, query):
         '''
-        convert the search_catgories dictionary into a new dictionary
-        containing compiled regex patterns
+        convert any regex in the query dict into compiled regex patterns
         '''
-        return dict(map(lambda cat: (cat, re.compile(self.search_regex[cat], re.IGNORECASE)),
-                        self.search_regex))
+        q_reg = {}
+        for q in query.keys():
+            if isinstance(query[q], basestring):
+                q_reg[q] = re.compile(query[q], re.IGNORECASE)
+        return q_reg
+
+    def _set_query_functions(self, query):
+        '''
+        set the functions to apply on the text
+        '''
+        q_funcs = {}
+        for q in query.keys():
+            if callable(query[q]):
+                q_funcs[q] = query[q]
+        return q_funcs
 
     def _parse_text(self, text):
         parsed = {}
-        for sf in self.search_functions.keys():
-            res = self.search_functions[sf](text)
-            parsed[sf] = res
-        _csr = self._compiled_search_regex
-        for k in _csr.keys():
-            # pattern _csr[k] will return None if not found
-            parsed[k] = True if _csr[k].search(text) else False
+        # Apply functions to text
+        for q in self._query_functions.keys():
+            parsed[q] = self._query_functions[q](text)
+        _cqr = self._compiled_query_regex
+        # Search text for regex
+        for k in _cqr.keys():
+            # pattern _cqr[k] will return None if not found
+            parsed[k] = True if _cqr[k].search(text) else False
         return parsed
 
     def parse_document(self, text_document, outfile=""):
@@ -46,10 +56,10 @@ class DocumentParser():
             return parsed
         # write to outfile
         with open(outfile, 'wb') as f:
-            f.write(','.join(self.header) + '\n')
+            f.write(','.join(self._header) + '\n')
             for p in parsed:
-                # write key values out in the order they appear in `header`
-                f.write(",".join(map(lambda k: str(p[k]), self.header))+'\n')
+                # write key values out in the order specified by user
+                f.write(",".join(map(lambda k: str(p[k]), self._header))+'\n')
         return outfile
 
     def __call__(self, text_document, outfile=""):
