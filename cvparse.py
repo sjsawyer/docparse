@@ -13,7 +13,8 @@ def _get_student_info(text):
     name, studient_id, full_program = text.strip().split('\n')[:3]
     year_and_program = full_program.split(',')[0]
     year, program = year_and_program.split(' ', 1)
-    first, last = name.split(' ', 1)
+    first = " ".join(name.split()[:-1])
+    last = name.split()[-1]
     student_info = {'first': first,
                     'last': last,
                     'id':   studient_id,
