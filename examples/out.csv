@@ -1,0 +1,46 @@
+chapter,title,color,vowel count,word count,most common word
+I,The Period,True,1720,1020,out
+II,The Mail,True,3181,2078,guard
+III,The Night Shadows,True,2572,1655,night
+IV,The Preparation,True,6989,4477,sir
+V,The Wine-shop,True,6783,4233,wine
+VI,The Shoemaker,True,6365,4194,no
+I,Five Years Later,True,3953,2501,tellson
+II,A Sight,True,3780,2437,jerry
+III,A Disappointment,True,7920,4946,prisoner
+IV,Congratulatory,True,3503,2291,mr
+V,The Jackal,True,3311,2181,stryver
+VI,Hundreds of People,True,7315,4667,miss
+VII,Monseigneur in Town,True,5703,3361,monseigneur
+VIII,Monseigneur in the Country,True,3105,1874,monseigneur
+IX,The Gorgon's Head,True,6640,4125,marquis
+X,Two Promises,True,4615,2988,me
+XI,A Companion Picture,True,2126,1430,sydney
+XII,The Fellow of Delicacy,True,3886,2617,mr
+XIII,The Fellow of No Delicacy,True,2797,1855,me
+XIV,The Honest Tradesman,True,6317,3985,cruncher
+XV,Knitting,True,6761,4262,defarge
+XVI,Still Knitting,True,6401,3907,madame
+XVII,One Night,True,2908,1928,me
+XVIII,Nine Days,True,3723,2457,lorry
+XIX,An Opinion,True,4465,2814,lorry
+XX,A Plea,True,2026,1364,me
+XXI,Echoing Footsteps,True,6930,4343,defarge
+XXII,The Sea Still Rises,True,3309,2061,defarge
+XXIII,Fire Rises,True,4386,2655,mender
+XXIV,Drawn to the Loadstone Rock,True,7132,4494,mr
+I,In Secret,True,7022,4281,darnay
+II,The Grindstone,True,3986,2529,out
+III,The Shadow,True,2777,1749,defarge
+IV,Calm in Storm,True,3485,2162,doctor
+V,The Wood-Sawyer,True,3660,2313,day
+VI,Triumph,True,4177,2525,who
+VII,A Knock at the Door,True,2933,1881,miss
+VIII,A Hand at Cards,True,7332,4775,mr
+IX,The Game Made,True,7265,4749,mr
+X,THE Substance of the Shadow,True,8727,5846,me
+XI,Dusk,True,2131,1480,when
+XII,Darkness,True,4991,3254,defarge
+XIII,Fifty-two,True,6939,4438,carton
+XIV,The Knitting Done,True,7379,4705,miss
+XV,The Footsteps Die Out For Ever,True,3449,2262,see
