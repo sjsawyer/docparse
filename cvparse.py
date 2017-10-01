@@ -2,6 +2,10 @@ import re
 import collections
 
 
+# delimiter separating cvs
+delimiter = "University of Waterloo\n"\
+            "Co-operative Work Terms"
+
 '''
 Below we define functions that are going to be executed on the text to
 compute some value of interest. These function handles will then be added
@@ -10,7 +14,8 @@ to the query dictionary below.
 
 
 def _get_student_info(text):
-    name, studient_id, full_program = text.strip().split('\n')[:3]
+    name, studient_id, full_program = \
+        text[len(delimiter):].strip().split('\n')[:3]
     year_and_program = full_program.split(',')[0]
     year, program = year_and_program.split(' ', 1)
     first = " ".join(name.split()[:-1])
@@ -73,10 +78,6 @@ query = collections.OrderedDict([
     ('linux', 'linux|command line|bash'),
 ])
 
-# delimiter separating cvs
-delimiter = "University of Waterloo\n"\
-            "Co-operative Work Terms"
-
 
 if __name__ == '__main__':
     import documentparser
@@ -85,7 +86,6 @@ if __name__ == '__main__':
     outfile = sys.argv[-1]
     DP = documentparser.DocumentParser(
             query,
-            delimiter,
-            discard=1)
+            delimiter)
 
     DP.parse_document(cvs, outfile=outfile)

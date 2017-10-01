@@ -19,12 +19,12 @@ class DocumentParser():
         Ignore the first `discard` pieces of text after separating based on
         `delimiter`.
     '''
-    def __init__(self, query, delimiter, discard=0):
+    def __init__(self, query, delimiter):
         self._query_functions = self._set_query_functions(query)
         self._compiled_query_regex = self._compile_regex(query)
         self._header = query.keys()
-        self._delimiter = re.compile(delimiter)
-        self._discard = discard
+        # Wrap the delimiter in parentheses to keep it in the parsing
+        self._delimiter = re.compile("({})".format(delimiter))
 
     def _compile_regex(self, query):
         '''
@@ -76,10 +76,11 @@ class DocumentParser():
 
         '''
         text = textract.process(text_document)
-        text_chunks = text.split(self._delimiter)
-        if self._discard:
-            # Throw away the first `discard` text chunks
-            text_chunks = text_chunks[self._discard:]
+        # TODO: refactor as a generator using re.finditer
+        text_chunks = self._delimiter.split(text)
+        # append the delimiter to the beginning of each text_chunk
+        text_chunks = [text_chunks[i] + text_chunks[i+1]
+                       for i in xrange(1, len(text_chunks), 2)]
         parsed = []
         for text_chunk in text_chunks:
             parsed.append(self._parse_text(text_chunk))
