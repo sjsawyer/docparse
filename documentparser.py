@@ -23,8 +23,8 @@ class DocumentParser():
         self._query_functions = self._set_query_functions(query)
         self._compiled_query_regex = self._compile_regex(query)
         self._header = query.keys()
-        self.delimiter = delimiter
-        self.discard = discard
+        self._delimiter = re.compile(delimiter)
+        self._discard = discard
 
     def _compile_regex(self, query):
         '''
@@ -76,10 +76,10 @@ class DocumentParser():
 
         '''
         text = textract.process(text_document)
-        text_chunks = text.split(self.delimiter)
-        if self.discard:
+        text_chunks = text.split(self._delimiter)
+        if self._discard:
             # Throw away the first `discard` text chunks
-            text_chunks = text_chunks[self.discard:]
+            text_chunks = text_chunks[self._discard:]
         parsed = []
         for text_chunk in text_chunks:
             parsed.append(self._parse_text(text_chunk))
