@@ -54,7 +54,7 @@ class DocumentParser():
         # Search text for regex
         for k in _cqr.keys():
             # pattern _cqr[k] will return None if not found
-            parsed[k] = True if _cqr[k].search(text) else False
+            parsed[k] = _cqr[k].search(text) is not None
         return parsed
 
     def parse_document(self, text_document, outfile=""):
