@@ -61,4 +61,4 @@ if __name__ == '__main__':
     import docparse
 
     dp = docparse.DocumentParser(query, delimiter)
-    dp.parse_document('2city10.txt', 'out.csv')
+    dp.parse_document('2city10.txt', '2city10_parsed.csv')

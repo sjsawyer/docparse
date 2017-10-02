@@ -80,8 +80,11 @@ query = collections.OrderedDict([
 
 
 if __name__ == '__main__':
-    import docparse
     import sys
+    from os.path import dirname, abspath
+    sys.path.append(dirname(dirname(abspath(__file__))))
+    import docparse
+
     cvs = sys.argv[-2]
     outfile = sys.argv[-1]
     dp = docparse.DocumentParser(query, delimiter)
