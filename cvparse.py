@@ -80,12 +80,10 @@ query = collections.OrderedDict([
 
 
 if __name__ == '__main__':
-    import documentparser
+    import docparse
     import sys
     cvs = sys.argv[-2]
     outfile = sys.argv[-1]
-    DP = documentparser.DocumentParser(
-            query,
-            delimiter)
+    dp = docparse.DocumentParser(query, delimiter)
+    dp.parse_document(cvs, outfile=outfile)
 
-    DP.parse_document(cvs, outfile=outfile)

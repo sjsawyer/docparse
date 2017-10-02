@@ -1,5 +1,5 @@
 '''
-Example of applying DocumentParser to a book.
+Example of applying docparse to a book.
 
 The file '2city10.txt' can be obtained from
 http://www.textfiles.com/etext/FICTION/2city10.txt.
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     from os.path import dirname, abspath
     import sys
     sys.path.append(dirname(dirname(abspath(__file__))))
-    import documentparser
+    import docparse
 
-    DP = documentparser.DocumentParser(query, delimiter)
-    DP.parse_document('2city10.txt', 'out.csv')
+    dp = docparse.DocumentParser(query, delimiter)
+    dp.parse_document('2city10.txt', 'out.csv')
