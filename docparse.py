@@ -15,9 +15,6 @@ class DocumentParser():
         text, or regex expressions to search for.
     delimiter : string
         A string that separates blocks of text to individually parse.
-    discard : int, optional
-        Ignore the first `discard` pieces of text after separating based on
-        `delimiter`.
     '''
     def __init__(self, query, delimiter):
         self._query_functions = self._set_query_functions(query)
